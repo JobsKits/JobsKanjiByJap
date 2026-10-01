@@ -1,0 +1,35 @@
+JobsKanjiByJap 数据来源与许可
+
+KANJIDIC2 / JMdict 版权归 James William BREEN 与电子词典研究开发组（EDRDG）所有。
+这些词典及本工程派生 SQLite 词典数据依据 知识共享署名—相同方式共享 4.0（CC BY-SA 4.0） 许可提供。
+来源及完整许可：https://www.edrdg.org/edrdg/licence.html
+https://www.edrdg.org/wiki/index.php/KANJIDIC_Project
+https://www.edrdg.org/wiki/index.php/JMdict-EDICT_Dictionary_Project
+https://creativecommons.org/licenses/by-sa/4.0/
+修改：提取日语音读、训读、名乘、英文释义、词性、读法和义项限制；建立检索索引；附加自动振假名。未复制 SKIP 等特殊索引数据。
+原始文件下载地址、SHA-256、构建时间及统计见 coverage.json。
+
+例句：Tatoeba Project / Tanaka Corpus，通过 JMdict_e_examp 分发；文本通常采用 CC BY 2.0 FR，作者和句子级许可见每条 Tatoeba 原句链接。
+https://tatoeba.org/en/terms_of_use
+https://creativecommons.org/licenses/by/2.0/fr/
+保留 ex_srce 原句 ID；软件提供原句 / 作者链接。未捆绑 Tatoeba 音频。
+
+自动振假名：SudachiPy 0.7.0 / SudachiDict-core 20260723.1，仅在构建语料时使用，结果不保证无歧义。
+https://github.com/WorksApplications/sudachi.rs
+https://github.com/WorksApplications/SudachiDict
+SudachiPy: Apache-2.0；SudachiDict: Apache-2.0 及词典中的第三方说明。
+
+中文学习卡片及显式振假名：Jobs 工程原创学习示例，非母语者人工审校承诺。
+PySide6 / Qt: LGPL-3.0 / GPL-3.0 / 商业许可，按所用模块适用许可，详情见随包 THIRD_PARTY.txt 和 licenses 目录。
+https://doc.qt.io/qtforpython-6/licenses.html
+打包运行时动态链接 Qt；相关发行库和许可证保留于应用包中。PyInstaller bootloader 使用 GPL 及商业分发例外。
+https://pyinstaller.org/en/stable/license.html
+
+离线中文转换：Argos en_zh 1.9 模型，以 CTranslate2 4.8.2 和 SentencePiece 0.2.2 运行。
+模型包说明：原 OPUS 模型采用 CC BY 4.0；作者 Jörg Tiedemann、Santhosh Thottingal，2020 年发表。
+模型来自 https://argos-net.com/v1/translate-en_zh-1_9.argosmodel
+模型完整说明保留在 translation/en_zh/README.md；原始包校验值见 translation_manifest.json。
+https://github.com/argosopentech/argospm-index
+https://creativecommons.org/licenses/by/4.0/
+CTranslate2 采用 MIT 许可；SentencePiece 采用 Apache-2.0 许可，随包保留相应许可。
+中文输出属于本机机器翻译，非权威日汉词典人工审定；英文源数据仅作内部推理和追溯，不在学习界面显示。

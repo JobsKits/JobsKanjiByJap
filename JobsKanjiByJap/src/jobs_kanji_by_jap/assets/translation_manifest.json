@@ -1,0 +1,11 @@
+{
+  "model": "Argos en_zh 1.9",
+  "sha256": "433e7c4f034d87fbe2353161e05f18646d7999452f801a4e1f0378522b9850ab",
+  "url": "https://argos-net.com/v1/translate-en_zh-1_9.argosmodel",
+  "license": "CC BY 4.0",
+  "display_languages": [
+    "zh",
+    "ja"
+  ],
+  "mode": "offline-on-demand-with-cache"
+}

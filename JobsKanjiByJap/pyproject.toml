@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "jobs-kanji-by-jap"
+version = "1.2.0"
+description = "Jobs 日语汉字点读词典"
+requires-python = ">=3.11,<3.15"
+dependencies = ["PySide6==6.11.2", "ctranslate2==4.8.2", "sentencepiece==0.2.2"]
+
+[project.optional-dependencies]
+build = ["pyinstaller==6.22.3"]
+corpus = ["sudachipy==0.7.0", "sudachidict_core==20260723.1"]
+
+[project.gui-scripts]
+jobs-kanji-by-jap = "jobs_kanji_by_jap.app:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+jobs_kanji_by_jap = ["assets/*", "assets/**/*"]

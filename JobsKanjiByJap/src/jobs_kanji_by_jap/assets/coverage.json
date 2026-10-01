@@ -1,0 +1,44 @@
+{
+  "built_at": "2026-09-29T23:40:04.341310+00:00",
+  "counts": {
+    "kanji": 13108,
+    "kanji_without_readings": 751,
+    "kanji_without_meanings": 2724,
+    "words": 218844,
+    "words_with_examples": 28929,
+    "sense_examples": 32311,
+    "unique_sentences": 26269,
+    "sentences_with_unknown_ruby": 2,
+    "kanji_without_words": 7092,
+    "kanji_with_examples": 3820
+  },
+  "sources": [
+    {
+      "file": "kanjidic2.xml.gz",
+      "url": "https://www.edrdg.org/kanjidic/kanjidic2.xml.gz",
+      "sha256": "3c746b53bb6b2b4b98142a07d57013aa0e911813bdac55b89ed130ba5e427649"
+    },
+    {
+      "file": "JMdict_e_examp.gz",
+      "url": "https://www.edrdg.org/pub/Nihongo/JMdict_e_examp.gz",
+      "sha256": "67f7a76b9f1e9bb0d95ef2b02f1b0c9a0928a9d4a4342192b20d901c1408cc1b"
+    }
+  ],
+  "limits": [
+    "覆盖 KANJIDIC2 收录的 JIS 汉字，不等于所有历史字、异体字、专名和读法。",
+    "未把词语读音强行分配给单个汉字；例句属于词义，不保证展示的每个读音都适用于该例句。",
+    "批量振假名由 Sudachi 自动生成，存在歧义；常见多音词另附人工编写学习示例。",
+    "学习界面仅显示中文与日文；中文字义预制，词义和例句译文按需在本机翻译并缓存，机器翻译未全量人工校对。"
+  ],
+  "translation": {
+    "model": "Argos en_zh 1.9",
+    "sha256": "433e7c4f034d87fbe2353161e05f18646d7999452f801a4e1f0378522b9850ab",
+    "url": "https://argos-net.com/v1/translate-en_zh-1_9.argosmodel",
+    "license": "CC BY 4.0",
+    "display_languages": [
+      "zh",
+      "ja"
+    ],
+    "mode": "offline-on-demand-with-cache"
+  }
+}
