@@ -1,0 +1,42 @@
+# Python 本地环境与缓存
+.venv/
+.venv-*/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# 构建缓存与平台安装包
+work/
+build/
+dist/
+*.app
+*.dmg
+*.exe
+*.msi
+*.pkg
+
+# 可重新生成的词库与外部模型权重（保留本地，不进入 Git）
+/JobsKanjiByJap/src/jobs_kanji_by_jap/assets/catalog.sqlite
+/JobsKanjiByJap/src/jobs_kanji_by_jap/assets/translation/en_zh/model/model.bin
+*.sqlite-journal
+*.sqlite-wal
+*.sqlite-shm
+
+# 日志、本地配置及系统文件
+*.log
+.DS_Store
+._*
+.env
+.env.*
+!.env.example
+!.env.sample
+.idea/
+.vscode/
+
+# 打包产物快捷方式（本机生成）
+*.lnk
+*.zip

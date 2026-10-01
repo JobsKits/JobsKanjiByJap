@@ -1,5 +1,7 @@
 # JobsKanjiByJap · 日语汉字点读
 
+![Jobs出品，必属精品](https://picsum.photos/1500/400)
+
 [toc]
 
 ---
