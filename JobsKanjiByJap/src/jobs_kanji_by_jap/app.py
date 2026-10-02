@@ -9,7 +9,7 @@ from PySide6.QtCore import Qt, QSize, QRectF, QTimer, QUrl, QStandardPaths
 from PySide6.QtGui import QColor, QFont, QFontMetricsF, QPainter, QDesktopServices, QPalette
 from PySide6.QtWidgets import (QApplication, QMainWindow, QWidget, QLabel, QPushButton,
     QVBoxLayout, QHBoxLayout, QLineEdit, QComboBox, QListWidget, QListWidgetItem,
-    QScrollArea, QSplitter, QDialog, QTextBrowser, QMessageBox, QSlider, QSizePolicy)
+    QGridLayout, QScrollArea, QSplitter, QDialog, QTextBrowser, QMessageBox, QSlider, QSizePolicy)
 from .catalog import Catalog, ASSETS
 from .linguistics import spoken_reading, allowed_senses
 from .speech import Speech
@@ -135,6 +135,7 @@ class Window(QMainWindow):
         self.theme_switch.currentIndexChanged.connect(
             lambda: theme.set_mode(self.theme_switch.currentData()))
         top.addWidget(self.theme_switch)
+        top.addWidget(button('元音 · 辅音 · 元音＋辅音', self.show_kana))
         top.addWidget(button('数据覆盖与使用说明', self.about))
         outer.addLayout(top)
         outer.addWidget(label('把读音放回词语里理解。音读 · 训读 · 名乘 · 熟字训', 'muted'))
@@ -194,6 +195,35 @@ class Window(QMainWindow):
         if items:
             self.list.setCurrentItem(items[0])
         self.statusBar().showMessage('离线词库已就绪 · 点击读音或例句播放日语')
+
+    def show_kana(self):
+        dialog = QDialog(self)
+        dialog.setWindowTitle('日语基础发音 · 点击点读')
+        dialog.resize(800, 760)
+        outer = QVBoxLayout(dialog)
+        outer.addWidget(label('上方元音、左侧辅音、内部组合都可点读。辅音用该行代表音节试听，并非孤立辅音录音。し shi、ち chi、つ tsu、ふ fu 为特殊读法；空格不生成组合。を读 o；ん为独立鼻音。', 'muted'))
+        scroll = QScrollArea()
+        scroll.setWidgetResizable(True)
+        body = QWidget()
+        grid = QGridLayout(body)
+        grid.addWidget(label('辅音 / 元音'), 0, 0)
+        for column, (kana, roman) in enumerate(zip('あいうえお', ('a', 'i', 'u', 'e', 'o')), 1):
+            grid.addWidget(button(f'{kana} / {roman}', lambda checked=False, text=kana: self.speech.say(text)), 0, column)
+        rows = [('k', 'かきくけこ', ['ka', 'ki', 'ku', 'ke', 'ko']), ('s', 'さしすせそ', ['sa', 'shi', 'su', 'se', 'so']), ('t', 'たちつてと', ['ta', 'chi', 'tsu', 'te', 'to']), ('n', 'なにぬねの', ['na', 'ni', 'nu', 'ne', 'no']), ('h', 'はひふへほ', ['ha', 'hi', 'fu', 'he', 'ho']), ('m', 'まみむめも', ['ma', 'mi', 'mu', 'me', 'mo']), ('y', 'や ゆ よ', ['ya', '', 'yu', '', 'yo']), ('r', 'らりるれろ', ['ra', 'ri', 'ru', 're', 'ro']), ('w', 'わ   を', ['wa', '', '', '', 'o']), ('g', 'がぎぐげご', ['ga', 'gi', 'gu', 'ge', 'go']), ('z', 'ざじずぜぞ', ['za', 'ji', 'zu', 'ze', 'zo']), ('d', 'だぢづでど', ['da', 'ji', 'zu', 'de', 'do']), ('b', 'ばびぶべぼ', ['ba', 'bi', 'bu', 'be', 'bo']), ('p', 'ぱぴぷぺぽ', ['pa', 'pi', 'pu', 'pe', 'po'])]
+        for row, (consonant, kana, readings) in enumerate(rows, 1):
+            grid.addWidget(button(f'{consonant} 行 / {kana[0]}', lambda checked=False, text=kana[0]: self.speech.say(text)), row, 0)
+            for column, (text, roman) in enumerate(zip(kana, readings), 1):
+                if roman:
+                    katakana = chr(ord(text) + 0x60)
+                    grid.addWidget(button(f'{text} {katakana} / {roman}', lambda checked=False, text=text: self.speech.say(text)), row, column)
+                else:
+                    grid.addWidget(label('—'), row, column)
+        grid.addWidget(button('ん ン / n · 鼻音', lambda: self.speech.say('ん')), len(rows) + 1, 0, 1, 6)
+        scroll.setWidget(body)
+        outer.addWidget(scroll)
+        outer.addWidget(button('停止', self.speech.engine.stop))
+        dialog.finished.connect(self.speech.engine.stop)
+        dialog.exec()
 
     def refresh(self):
         rows = self.catalog.search(self.search.text(), self.group.currentIndex())
