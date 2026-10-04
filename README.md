@@ -16,7 +16,7 @@ https://github.com/user-attachments/assets/34c38e1e-97f2-4e26-8e25-eb6fdcb8ee82
 
 读音不由词性单独决定。例如「生きる＝いきる」「学生＝がくせい」「生ビール＝なまビール」。自动词 / 他动词、送假名、连浊和熟字训也需要结合词语学习。
 
-## 一、功能与覆盖范围
+## 一、功能与覆盖范围 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 | 内容 | 当前收录 |
 | --- | ---: |
@@ -37,9 +37,10 @@ https://github.com/user-attachments/assets/34c38e1e-97f2-4e26-8e25-eb6fdcb8ee82
 - `生、日、行、上、下、人、月、大、食、見、読、水` 另附中文学习讲解。所有词性使用固定中文映射，例如“一段动词／他动词”。中文检索反查已收录的中文字义；本工具是中日对照词典，不是任意长文翻译器。
 - 常见多音字学习卡使用明确指定的红色振假名。其他例句使用 [**Sudachi**](https://github.com/WorksApplications/sudachi.rs) 分词结果，可能存在同形词歧义；2 条句子含未识别读音，界面明确显示“未识别”。
 - 例句从词义层级关联；一个词义的例句不代表适用于该词所有读法。点击 Tatoeba 原句链接可查看作者及校对信息。
+- 日语基础发音表为平假名 / 片假名标注 Hepburn 罗马字和宽式 IPA；含 5 个元音、14 个辅音行及 ん。辅音行用代表音节点读，注音用于辅助识读，不表示词典级重音或语境变音。
 - 发音使用系统日语合成语音。点击假名时按假名朗读，新的点读会停止上一次朗读。不承诺音调词典级重音准确性。
 
-## 二、使用方式
+## 二、使用方式 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 1、打开打包后的 `JobsKanjiByJap.app`，或 Windows 分发目录内的 `JobsKanjiByJap.exe`。
 
@@ -53,7 +54,7 @@ https://github.com/user-attachments/assets/34c38e1e-97f2-4e26-8e25-eb6fdcb8ee82
 
 中文讲解、词库、例句和离线翻译模型均随软件携带；打开原句来源链接、安装依赖、主动更新词库需要联网。
 
-## 三、源码与目录
+## 三、源码与目录 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```text
 JobsKanjiByJap.py/
@@ -78,7 +79,7 @@ python3 JobsKanjiByJap/scripts/bootstrap.py run
 
 Windows 对应使用 `py -3 JobsKanjiByJap/scripts/bootstrap.py run`。入口先显示内置说明并等待确认；环境缺依赖时直接回车安装，输入任意字符后回车取消整个流程。依赖放入工程 `.venv`，不升级系统 Python。已有 `.venv` 损坏时停止，并提示先改名备份。
 
-## 四、双平台打包
+## 四、双平台打包 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 依赖链：Python 3.11–3.14 → venv / pip → PySide6 / PyInstaller / CTranslate2 / SentencePiece → 应用、词库与离线模型；macOS 生成 DMG 还依赖系统 `hdiutil` 和 `ditto`。正常打包使用已附词库，不安装分词器或重新下载语料。
 
@@ -93,7 +94,7 @@ Windows 对应使用 `py -3 JobsKanjiByJap/scripts/bootstrap.py run`。入口先
 
 此工程不含 Apple Developer ID 签名、公证或 Windows 商业签名。公共发行需要发行者自行签名，并保留词典及第三方许可。
 
-## 五、数据来源、更新与日志
+## 五、数据来源、更新与日志 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 词典来自 [**EDRDG**](https://www.edrdg.org/edrdg/licence.html)，字库和派生 SQLite 数据采用 CC BY-SA 4.0。例句来自 [**Tatoeba**](https://tatoeba.org/en/terms_of_use)，保留句子来源 ID 和原句链接。原始来源地址、SHA-256、构建时间见 `./JobsKanjiByJap/src/jobs_kanji_by_jap/assets/coverage.json`；完整归属见同目录 `NOTICE.txt`，打包时会收集 Qt 等依赖许可。中文转换使用 [**Argos 模型**](https://github.com/argosopentech/argospm-index) 和 [**CTranslate2**](https://opennmt.net/CTranslate2/) 本地推理；模型包说明采用 CC BY 4.0，模型作者为 Jörg Tiedemann 和 Santhosh Thottingal，模型原始说明及文件随源码保留。
 
@@ -107,7 +108,7 @@ python3 JobsKanjiByJap/scripts/bootstrap.py update
 
 构建与运行启动日志：系统临时目录 `JobsKanjiByJap-build.log`、`JobsKanjiByJap-run.log`、`JobsKanjiByJap-update.log`。中文缓存：系统应用数据目录中的 `chinese-v2.sqlite`，只保存公开词典的中文转换结果。学习期间不调用在线翻译服务、不需要密钥。应用异常日志：系统应用数据目录 `Jobs/JobsKanjiByJap/logs/app.log`（具体目录由 Qt 按系统决定，报错弹窗给出路径）。
 
-### Git 克隆后的资源准备
+### Git 克隆后的资源准备 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 Git 仓库不包含大型 `catalog.sqlite` 词库、`model.bin` 模型权重、虚拟环境和构建产物；本地已有资源不受忽略规则影响。完整安装包仍包含运行所需资源。仅克隆源码后，须先准备以下资源，再运行或打包：
 
@@ -117,13 +118,15 @@ Git 仓库不包含大型 `catalog.sqlite` 词库、`model.bin` 模型权重、�
 
 添加源码使用 `git add .`，让 Git 自己遵守忽略规则；不要用 `git add *` 将被忽略目录作为显式参数传入，也不要强制添加词库、模型或安装包。
 
-## 六、验证与限制
+## 六、验证与限制 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 提供 `unittest` 检查词库完整性、关键多音字、词义限制、振假名送假名保留、检索和分页；Qt 离屏检查验证界面构造及截图。最终执行记录见 `./验证结果.txt`。
 
+2026-10-03 基础假名增加 Hepburn 罗马字与宽式 IPA 后，`python3 -m compileall -q src` 通过；本轮未运行 UI 或设备语音验证。
+
 Windows 入口已静态审查，未在 Windows 真机执行。学习界面已停止显示英文解释，但 1,113 条预制字义仍需中文校对，机器译文未全量人工核对；缺失读音、无源释义、生僻字逐音例句尚未补齐；这些是语料缺口，不能用自动拼接读音或自动造句冒充字典事实。
 
-## 七、常见问题
+## 七、常见问题 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 **没有声音？** 安装系统日语语音。macOS：系统设置 → 辅助功能 → 朗读内容 / 朗读与语音 → 系统声音；Windows：设置 → 时间和语言 → 语言 / 语音。安装后重启应用，软件会重新枚举日语语音。系统语音引擎不可用时状态栏会明确报错。
 

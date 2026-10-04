@@ -27,3 +27,7 @@ Windows EXE 尚未在 Windows 真机构建或运行；未做 Intel Mac 构建、
 通过原生界面检查：日夜滚动视口与正文颜色、弹窗、设置重新读取、模拟系统外观变化和固定模式隔离。真实系统切换与 Windows 运行尚未实测。
 构建产物：/Users/jobs/Desktop/JobsKanjiByJap.py/dist/20261001-010420
 DMG 校验通过。
+
+2026-10-03 日语基础假名注音
+- 基础假名点读按钮增加 Hepburn 罗马字与宽式 IPA 辅助标注。
+- `python3 -m compileall -q src` 通过；本轮未运行 UI、设备 TTS 或重新打包。

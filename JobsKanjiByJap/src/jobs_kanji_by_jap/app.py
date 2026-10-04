@@ -18,6 +18,24 @@ from .translation_ui import ChineseLabels
 
 from .theme import ReadingTheme
 
+KANA_IPA = {
+    "あ": "a", "い": "i", "う": "ɯ", "え": "e", "お": "o",
+    "か": "ka", "き": "ki", "く": "kɯ", "け": "ke", "こ": "ko",
+    "さ": "sa", "し": "ɕi", "す": "sɯ", "せ": "se", "そ": "so",
+    "た": "ta", "ち": "tɕi", "つ": "tsɯ", "て": "te", "と": "to",
+    "な": "na", "に": "ni", "ぬ": "nɯ", "ね": "ne", "の": "no",
+    "は": "ha", "ひ": "çi", "ふ": "ɸɯ", "へ": "he", "ほ": "ho",
+    "ま": "ma", "み": "mi", "む": "mɯ", "め": "me", "も": "mo",
+    "や": "ja", "ゆ": "jɯ", "よ": "jo",
+    "ら": "ɾa", "り": "ɾi", "る": "ɾɯ", "れ": "ɾe", "ろ": "ɾo",
+    "わ": "wa", "を": "o", "が": "ɡa", "ぎ": "ɡi", "ぐ": "ɡɯ",
+    "げ": "ɡe", "ご": "ɡo", "ざ": "za", "じ": "dʑi", "ず": "zɯ",
+    "ぜ": "ze", "ぞ": "zo", "だ": "da", "ぢ": "dʑi", "づ": "dzɯ",
+    "で": "de", "ど": "do", "ば": "ba", "び": "bi", "ぶ": "bɯ",
+    "べ": "be", "ぼ": "bo", "ぱ": "pa", "ぴ": "pi", "ぷ": "pɯ",
+    "ぺ": "pe", "ぽ": "po", "ん": "ɴ",
+}
+
 
 def label(text, name='', wrap=True):
     item = QLabel(text)
@@ -201,24 +219,24 @@ class Window(QMainWindow):
         dialog.setWindowTitle('日语基础发音 · 点击点读')
         dialog.resize(800, 760)
         outer = QVBoxLayout(dialog)
-        outer.addWidget(label('上方元音、左侧辅音、内部组合都可点读。辅音用该行代表音节试听，并非孤立辅音录音。し shi、ち chi、つ tsu、ふ fu 为特殊读法；空格不生成组合。を读 o；ん为独立鼻音。', 'muted'))
+        outer.addWidget(label('上方元音、左侧辅音、内部组合都可点读。每格附 Hepburn 罗马字与宽式 IPA；辅音用代表音节试听。し shi、ち chi、つ tsu、ふ fu 为特殊读法；空格不生成组合。を读 o；ん的发音随语境变化。注音仅作入门提示。', 'muted'))
         scroll = QScrollArea()
         scroll.setWidgetResizable(True)
         body = QWidget()
         grid = QGridLayout(body)
         grid.addWidget(label('辅音 / 元音'), 0, 0)
         for column, (kana, roman) in enumerate(zip('あいうえお', ('a', 'i', 'u', 'e', 'o')), 1):
-            grid.addWidget(button(f'{kana} / {roman}', lambda checked=False, text=kana: self.speech.say(text)), 0, column)
+            grid.addWidget(button(f'{kana}\n{roman} /{KANA_IPA[kana]}/', lambda checked=False, text=kana: self.speech.say(text)), 0, column)
         rows = [('k', 'かきくけこ', ['ka', 'ki', 'ku', 'ke', 'ko']), ('s', 'さしすせそ', ['sa', 'shi', 'su', 'se', 'so']), ('t', 'たちつてと', ['ta', 'chi', 'tsu', 'te', 'to']), ('n', 'なにぬねの', ['na', 'ni', 'nu', 'ne', 'no']), ('h', 'はひふへほ', ['ha', 'hi', 'fu', 'he', 'ho']), ('m', 'まみむめも', ['ma', 'mi', 'mu', 'me', 'mo']), ('y', 'や ゆ よ', ['ya', '', 'yu', '', 'yo']), ('r', 'らりるれろ', ['ra', 'ri', 'ru', 're', 'ro']), ('w', 'わ   を', ['wa', '', '', '', 'o']), ('g', 'がぎぐげご', ['ga', 'gi', 'gu', 'ge', 'go']), ('z', 'ざじずぜぞ', ['za', 'ji', 'zu', 'ze', 'zo']), ('d', 'だぢづでど', ['da', 'ji', 'zu', 'de', 'do']), ('b', 'ばびぶべぼ', ['ba', 'bi', 'bu', 'be', 'bo']), ('p', 'ぱぴぷぺぽ', ['pa', 'pi', 'pu', 'pe', 'po'])]
         for row, (consonant, kana, readings) in enumerate(rows, 1):
-            grid.addWidget(button(f'{consonant} 行 / {kana[0]}', lambda checked=False, text=kana[0]: self.speech.say(text)), row, 0)
+            grid.addWidget(button(f'{consonant} 行 / {kana[0]}\n{readings[0]} /{KANA_IPA[kana[0]]}/', lambda checked=False, text=kana[0]: self.speech.say(text)), row, 0)
             for column, (text, roman) in enumerate(zip(kana, readings), 1):
                 if roman:
                     katakana = chr(ord(text) + 0x60)
-                    grid.addWidget(button(f'{text} {katakana} / {roman}', lambda checked=False, text=text: self.speech.say(text)), row, column)
+                    grid.addWidget(button(f'{text} {katakana}\n{roman} /{KANA_IPA[text]}/', lambda checked=False, text=text: self.speech.say(text)), row, column)
                 else:
                     grid.addWidget(label('—'), row, column)
-        grid.addWidget(button('ん ン / n · 鼻音', lambda: self.speech.say('ん')), len(rows) + 1, 0, 1, 6)
+        grid.addWidget(button('ん ン\nn /ɴ/ · 鼻音', lambda: self.speech.say('ん')), len(rows) + 1, 0, 1, 6)
         scroll.setWidget(body)
         outer.addWidget(scroll)
         outer.addWidget(button('停止', self.speech.engine.stop))
